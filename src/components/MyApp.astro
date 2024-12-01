@@ -1,9 +1,45 @@
 ---
-// const response = await fetch('');
-// const allTheData = await response.json();
+const apiKey = "5417efc961635948e3a3955b7c08ff4e"; // Load API key from environment variables
+const city = "Spokane"; // Default city
+
+let weather = null;
+let tempCelsius = null;
+let feelsLikeCelsius = null;
+let sunrise = null;
+let sunset = null;
+
+try {
+  // Fetch weather data from OpenWeatherMap API
+  const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
+  if (!response.ok) throw new Error("Failed to fetch weather data");
+
+  weather = await response.json();
+
+  // Convert temperatures from Kelvin to Celsius
+  tempCelsius = Math.round(weather.main.temp - 273.15);
+  feelsLikeCelsius = Math.round(weather.main.feels_like - 273.15);
+
+  // Format sunrise and sunset times
+  sunrise = new Date(weather.sys.sunrise * 1000).toLocaleTimeString();
+  sunset = new Date(weather.sys.sunset * 1000).toLocaleTimeString();
+} catch (error) {
+  console.error("Error fetching weather data:", error);
+}
 ---
 
-
-
-
-
+<div class="container mx-auto text-center py-10">
+  {weather ? (
+    <>
+      <h1 class="text-3xl font-bold">Weather in {weather.name}</h1>
+      <p class="text-lg">{weather.weather[0]?.description || "No description available"}</p>
+      <p class="text-xl font-semibold">Temperature: {tempCelsius || "N/A"}°C</p>
+      <p>Feels like: {feelsLikeCelsius || "N/A"}°C</p>
+      <p>Humidity: {weather.main?.humidity || "N/A"}%</p>
+      <p>Wind Speed: {weather.wind?.speed || "N/A"} m/s</p>
+      <p>Sunrise: {sunrise || "N/A"}</p>
+      <p>Sunset: {sunset || "N/A"}</p>
+    </>
+  ) : (
+    <p class="text-red-500">Unable to fetch weather data. Please try again later.</p>
+  )}
+</div>
