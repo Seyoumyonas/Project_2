@@ -1,4 +1,32 @@
-/* Diagnostic Styling */
-* {
-    outline: 1px dotted gray;
-}
+/* styles/myCustomStyles.css */
+.weather-container {
+    background: #334155;
+    color: #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .weather-container h1 {
+    font-size: 2rem;
+    color: #facc15;
+    margin-bottom: 1rem;
+  }
+  
+  .weather-container p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+  }
+  
+  .weather-icon img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .weather-container strong {
+    color: #3b82f6;
+  }
+  
