@@ -1,32 +1,60 @@
-/* styles/myCustomStyles.css */
 .weather-container {
-    background: #334155;
+    background: linear-gradient(135deg, #1e293b, #334155); /* Add gradient background */
     color: #e2e8f0;
-    border-radius: 12px;
-    padding: 20px;
+    border-radius: 16px; /* Slightly more rounded corners */
+    padding: 24px;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); /* Enhance the shadow for a cleaner look */
     max-width: 600px;
     margin: 20px auto;
-  }
-  
-  .weather-container h1 {
-    font-size: 2rem;
-    color: #facc15;
+    transition: transform 0.3s, box-shadow 0.3s; /* Add hover effect */
+}
+
+.weather-container:hover {
+    transform: translateY(-5px); /* Subtle lift on hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.weather-container h1 {
+    font-size: 2.2rem; /* Slightly larger for better readability */
+    color: #facc15; /* Keep the vibrant yellow */
     margin-bottom: 1rem;
-  }
-  
-  .weather-container p {
-    margin: 0.5rem 0;
-    font-size: 1.1rem;
-  }
-  
-  .weather-icon img {
-    width: 100px;
-    height: 100px;
-  }
-  
-  .weather-container strong {
-    color: #3b82f6;
-  }
-  
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Add text shadow for better contrast */
+}
+
+.weather-container p {
+    margin: 0.7rem 0; /* Increase spacing slightly */
+    font-size: 1.2rem; /* Increase font size for better readability */
+    line-height: 1.6; /* Improve text spacing */
+}
+
+.weather-icon img {
+    width: 120px; /* Make the icon slightly larger */
+    height: 120px;
+    margin-bottom: 1rem;
+}
+
+.weather-container strong {
+    color: #60a5fa; /* Slightly lighter blue for better contrast */
+    font-weight: 600; /* Add weight to make it stand out */
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .weather-container {
+        padding: 16px; /* Reduce padding for smaller screens */
+    }
+
+    .weather-container h1 {
+        font-size: 1.8rem; /* Scale down title size */
+    }
+
+    .weather-container p {
+        font-size: 1rem; /* Adjust paragraph size */
+    }
+
+    .weather-icon img {
+        width: 100px; /* Adjust icon size */
+        height: 100px;
+    }
+}

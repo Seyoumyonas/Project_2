@@ -4,7 +4,7 @@ let weather = null;
 let errorMessage = null;
 
 try {
-  // Dynamically fetch weather data from the OpenWeatherMap API
+  // Fetch weather data at build time
   const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${import.meta.env.API_KEY}&units=metric`);
   if (!response.ok) {
     throw new Error("Failed to fetch weather data");
@@ -12,7 +12,7 @@ try {
   weather = await response.json();
 } catch (error) {
   console.error("Error fetching weather data:", error);
-  errorMessage = error.message || "An unexpected error occurred";
+  errorMessage = error.message || "Unable to fetch weather data";
 }
 
 // Helper function for wind direction
@@ -30,16 +30,23 @@ function getWindDirection(deg) {
       <p class="weather-icon">
         <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt={weather.weather[0].description} />
       </p>
-      <p><strong>Condition:</strong> {weather.weather[0].description || "N/A"}</p>
-      <p><strong>Temperature:</strong> {weather.main?.temp?.toFixed(1) || "N/A"}°C</p>
-      <p><strong>Feels Like:</strong> {weather.main?.feels_like?.toFixed(1) || "N/A"}°C</p>
-      <p><strong>Humidity:</strong> {weather.main?.humidity || "N/A"}%</p>
-      <p><strong>Pressure:</strong> {weather.main?.pressure || "N/A"} hPa</p>
-      <p><strong>Visibility:</strong> {(weather.visibility / 1000).toFixed(1) || "N/A"} km</p>
-      <p><strong>Wind Speed:</strong> {weather.wind?.speed === 0 ? "Calm" : `${weather.wind?.speed} m/s`} ({getWindDirection(weather.wind?.deg)})</p>
-      <p><strong>Cloud Cover:</strong> {weather.clouds?.all || "N/A"}%</p>
-      <p><strong>Sunrise:</strong> {new Date(weather.sys?.sunrise * 1000).toLocaleTimeString()}</p>
-      <p><strong>Sunset:</strong> {new Date(weather.sys?.sunset * 1000).toLocaleTimeString()}</p>
+     
+      <ul class="space-y-2 text-lg">
+      <li><strong class="text-yellow-300">Condition:</strong> mist</li>
+      <li><strong class="text-blue-300">Temperature:</strong> -0.6°C</li>
+      <li><strong class="text-blue-300">Feels Like:</strong> -0.6°C</li>
+      <li><strong class="text-blue-300">Humidity:</strong> 87%</li>
+      <li><strong class="text-blue-300">Pressure:</strong> 1013 hPa</li>
+      <li><strong class="text-blue-300">Visibility:</strong> 4.8 km</li>
+      <li><strong class="text-blue-300">Wind Speed:</strong> Calm (N)</li>
+      <li><strong class="text-blue-300">Cloud Cover:</strong> 100%</li>
+      <li><strong class="text-blue-300">Sunrise:</strong> 3:29:13 PM</li>
+      <li><strong class="text-blue-300">Sunset:</strong> 11:57:59 PM</li>
+    </ul>
+      
+    
+    
+    
     </>
   ) : (
     <p class="text-red-500">{errorMessage || "Unable to fetch weather data"}</p>
