@@ -1,8 +1,9 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  output: 'server',
-  integrations: [tailwind(), vercel()],
+  output: 'static', // Use static output instead of server
+  integrations: [
+    tailwind(), // Include TailwindCSS
+  ],
 });
